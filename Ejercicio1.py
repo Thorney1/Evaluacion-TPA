@@ -1,11 +1,13 @@
 import sys
-from PyQt6 import QtCore
+from PyQt6 import QtCore, QtGui
 from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton, QMainWindow, QGridLayout
+
 
 class VentanaPrincipal(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle('Ejercicio1 Seccion Práctica Prueba Individual')
+        self.setGeometry(100, 100, 600, 400)
         self.central_widget = QWidget()
         self.setCentralWidget(self.central_widget)
         self.layout_principal = QVBoxLayout()
@@ -16,9 +18,7 @@ class VentanaPrincipal(QMainWindow):
         self.layout_principal.addLayout(self.layout_superior)
         self.label_nombre_usuario = QLabel('Nombre de usuario')
         self.layout_superior.addWidget(self.label_nombre_usuario)
-        self.boton_ok = QPushButton('OK')
-        self.layout_superior.addWidget(self.boton_ok, alignment= QtCore.Qt.AlignmentFlag.AlignRight)
-
+        
         # Layout central
         self.layout_central = QHBoxLayout()
         self.layout_principal.addLayout(self.layout_central)
@@ -26,7 +26,9 @@ class VentanaPrincipal(QMainWindow):
         # Layout izquierdo
         self.layout_izquierdo = QVBoxLayout()
         self.layout_central.addLayout(self.layout_izquierdo)
-        self.label_imagen = QLabel('Imagen')
+        self.label_imagen = QLabel()
+        self.pixmap = QtGui.QPixmap("\gato.jpg")  # ruta de la imagen
+        self.label_imagen.setPixmap(self.pixmap.scaledToWidth(200))  # escalamos la imagen para que quepa en la ventana
         self.layout_izquierdo.addWidget(self.label_imagen)
         self.label_texto = QLabel('Texto')
         self.layout_izquierdo.addWidget(self.label_texto)
@@ -50,6 +52,10 @@ class VentanaPrincipal(QMainWindow):
         self.layout_derecho.addWidget(self.label_atributo_4, 3, 0)
         self.label_valor_4 = QLabel('Valor 4')
         self.layout_derecho.addWidget(self.label_valor_4, 3, 1)
+
+        # Botón OK
+        self.boton_ok = QPushButton('OK')
+        self.layout_principal.addWidget(self.boton_ok, alignment=QtCore.Qt.AlignmentFlag.AlignRight | QtCore.Qt.AlignmentFlag.AlignBottom)
 
 
 if __name__ == '__main__':
